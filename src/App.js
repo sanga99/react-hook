@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import axios from 'axios';
 
 function App() {
   const [posts, setPosts] = useState([]);
+
+  // 컴포넌트가 렌더링(화면에 그려지는 것) 될 때마다 useEffect가 실행됨.
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then(res => console.log(res))
+  })
+
+
   return (
     <Container>
       <GlobalStyle />
