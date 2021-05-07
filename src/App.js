@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 function App() {
+  /*
+      useState는 길이가 2인 배열을 반환한다.
+      첫번째 요소는 state, 두번째 요소는 state를 변경시키는 함수.
+
+      즉, 아래 코드는 다음과 같다. 여기서 useState의 인자로 전달함 값 "black"은 state의 초기값이다.
+      const color = useState("black")[0];
+      const setColor = useState("black")[1];
+  */
+  const [color, setColor] = useState("black");
   return (
     <Container>
-      <Pallete />
+      {/* 
+          Pallete에 color값 전달 (props전달)
+      */}
+      <Pallete color={color}/>
       <ButtonContainer>
         <CyanButton />
         <BrownButton />
@@ -13,6 +25,14 @@ function App() {
     </Container>
   );
 }
+
+// props 값 받아 css 
+const Pallete = styled.div`
+  width: 700px;
+  height: 700px;
+  border: 1px solid black;
+  background: ${props => props.color};
+`;
 
 const Container = styled.div`
   width: 100vw;
@@ -23,11 +43,6 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Pallete = styled.div`
-  width: 700px;
-  height: 700px;
-  border: 1px solid black;
-`;
 
 const ButtonContainer = styled.div`
   margin-top: 50px;
