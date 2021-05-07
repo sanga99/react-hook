@@ -8,8 +8,34 @@ function App() {
   // 컴포넌트가 렌더링(화면에 그려지는 것) 될 때마다 useEffect가 실행됨.
   useEffect(() => {
     axios.get('https://jsonplaceholder.typicode.com/posts')
-    .then(res => console.log(res))
+    .then( ({data}) => {
+          setPosts(data);
+          /*
+             posts에 저장.
+             [useEffect 로직]
+              이때, useEffect 내부에서 state를 변경시켰기 때문애 컴포넌트의 재렌더링이 일어난다. 
+
+             [문제점]
+              렌더링시에는 다시 useEffect가 실행되니 아래와 같이 무한 렌더링이 일어나게 된다.
+              렌더링 -> useEffect -> posts state 변화 -> 렌더링 -> useEffect -> posts state 변화 -> 렌더링 -> ...
+
+            [해결]
+              이를 해결하기 위해, useEffect에 두번때 인자를 전달한다.
+              두번째 인자로 배열을 전달하면 렌더링시에 배열 내의 요소가 변화될 때에만 useEffect를 실행한다. 
+              빈 배열( [] )을 전달하면 변화를 감지할만한 요소 자체가 없으므로 useEffect는 최초 렌더링시에 한번만 실행되는 것이 보장된다.
+            
+
+          */
+    })
   })
+
+  /*
+      [참고]
+      .then( ({data}) => {
+
+      에서 ({data})는 ES6의 Destructing문법이다.
+      이렇게 사용하면, 받아온 response객체안에 있는 data배열을 바로 참조할 수 있다. 
+  */
 
 
   return (
