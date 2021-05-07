@@ -38,25 +38,18 @@ function App() {
   */
 
 
+  /*
+        JSX안에서는 중괄호 {} 를 사용해 자바스크립트 함수를 사용할 수 있다.
+  */
   return (
     <Container>
       <GlobalStyle />
-      <Post>
-        <Title>Title1</Title>
-        <Body>Body1</Body>
-      </Post>
-      <Post>
-        <Title>Title2</Title>
-        <Body>Body2</Body>
-      </Post>
-      <Post>
-        <Title>Title3</Title>
-        <Body>Body3</Body>
-      </Post>
-      <Post>
-        <Title>Title4</Title>
-        <Body>Body4</Body>
-      </Post>
+        {posts.map((post, index) => (
+          <Post key={index}>
+            <Title>{post.title}</Title>
+            <Body>{post.body}</Body>
+          </Post>
+        ))}
     </Container>
   );
 }
