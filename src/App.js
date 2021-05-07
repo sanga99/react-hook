@@ -14,13 +14,21 @@ function App() {
   return (
     <Container>
       {/* 
-          Pallete에 color값 전달 (props전달)
+          - Pallete에 color값 전달 (props전달)
+
+
+          - 버튼을 클릭할 때마다 해당 생상으로 color state가 바뀌면서 화면에 재렌더링이 일어남.
+          
+          -★★★ 만약, 
+            onClick={setColor('cyan')}    와 같이 값을 주면, 
+            컴포넌트가 화면에 그려지면서 setColor함수가 실행되기 때문에 무한루프에 빠지거나 원하는 결과를 얻을 수 없다
+              렌더링 -> state변경 -> 변경으로인한 렌더링 -> state변경 -> ...
       */}
       <Pallete color={color}/>
       <ButtonContainer>
-        <CyanButton />
-        <BrownButton />
-        <PinkButton />
+        <CyanButton onClick={()=>setColor('cyan')}/>
+        <BrownButton onClick={()=>setColor('brown')}/>
+        <PinkButton onClick={()=>setColor('pink')}/>
       </ButtonContainer>
     </Container>
   );
